@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Login />
+    <PlayerEvent />
   </div>
 </template>
 
 <script>
-import Login from "@/components/Login";
+import PlayerEvent from "@/components/PlayerEvent";
 export default {
   mounted() {},
   components: {
-    Login,
+    PlayerEvent,
   },
 };
 </script>

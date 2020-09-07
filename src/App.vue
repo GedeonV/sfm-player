@@ -1,12 +1,62 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <a
+        v-if="this.$store.state.user"
+        type="button"
+        @click="logout()"
+        class="router-link-active"
+        href="#"
+        >Déconnexion</a
+      >
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    logout() {
+      this.$store.commit("logout");
+      this.$router.push("/");
+    },
+    onRouteChange() {
+      if (this.$store.state.user == false) {
+        this.$router.push("/");
+      }
+    },
+  },
+
+  watch: {
+    $route(to, from) {
+      this.onRouteChange();
+    },
+  },
+
+  mounted() {
+    if (this.$store.state.user == false) {
+      this.$router.push("/");
+    }
+    let header = document.createElement("script");
+    header.setAttribute(
+      "src",
+      "https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    );
+    document.head.appendChild(header);
+  },
+  computed: {
+    tokenSet() {
+      return this.$store.state.user_token !== ""
+        ? this.$store.state.user_token
+        : "";
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
