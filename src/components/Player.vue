@@ -16,8 +16,8 @@
       <button v-else @click="togglePausePlay()">Pause</button>
       <button @click="nextMusic()">Next</button>
       <button @click="prevMusic()">Previous</button>
-      <div class="song-artist">{{currentArtist}}</div>
-      <div class="song-title">{{currentSongTitle}}</div>
+      <div class="song-artist">{{ currentArtist }}</div>
+      <div class="song-title">{{ currentSongTitle }}</div>
       <input
         type="range"
         id="progress-bar"
@@ -27,7 +27,7 @@
         @change="changeProgressBar()"
       />
       <div class="currentTime">{{ currentTime }}</div>
-      <div class="durationTime">{{durationTime }}</div>
+      <div class="durationTime">{{ durationTime }}</div>
     </div>
   </div>
 </template>
@@ -151,8 +151,8 @@ export default {
         .get("parties/event/" + this.$route.params.id)
         .then((response) => {
           console.log(response.data);
-          this.event = response.data;
-          this.users = response.data.users;
+          this.event = response.data.event;
+          this.users = response.data.event.users;
           this.users.forEach((element) => {
             this.fullname = element.first_name + " " + element.last_name;
             console.log(this.fullname);
@@ -324,3 +324,5 @@ export default {
   outline: none;
 }
 </style>
+
+// 69ba4c4276222937c90ca1f0398163b7 //

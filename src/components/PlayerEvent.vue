@@ -21,7 +21,7 @@ export default {
       axios
         .get("parties/")
         .then((response) => {
-          this.events = response.data;
+          this.events = response.data.events;
           console.log(this.events);
         })
         .catch((err) => {
