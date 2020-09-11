@@ -1,15 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <a
-        v-if="this.$store.state.user"
-        type="button"
-        @click="logout()"
-        class="router-link-active"
-        href="#"
-        >Déconnexion</a
-      >
-    </div>
+    <nav class="navbar">
+      <div class="navbar-start">
+        <a @click="$router.go(-1)" class="navbar-item"
+          ><i class="fas fa-arrow-left" style="margin-right: 0.5em"></i
+          >Retour</a
+        >
+      </div>
+      <div class="navbar-end">
+        <a
+          v-if="this.$store.state.user"
+          type="button"
+          @click="logout()"
+          class="navbar-item"
+          href="#"
+          >Déconnexion</a
+        >
+      </div>
+    </nav>
     <router-view />
   </div>
 </template>
@@ -59,24 +67,27 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+@import "assets/scss/style.scss";
+@import "../node_modules/bulma/bulma.sass";
+
+div#app {
+  font-family: Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #dfdde0;
+  height: 100vh;
+  background-color: #36393f;
 }
 
-#nav {
-  padding: 30px;
+label {
+  color: #ffffff;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  background-color: #36393f;
 }
 </style>

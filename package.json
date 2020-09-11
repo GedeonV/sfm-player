@@ -9,8 +9,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bulma": "^0.9.0",
-    "vue": "^2.6.11",
+    "bulma-scss": "^0.9.0-1",
+    "vue": "^2.6.12",
+    "vue-audio-visual": "^2.2.0",
     "vue-router": "^3.2.0",
+    "vue-template-compiler": "^2.6.12",
     "vuex": "^3.4.0",
     "vuex-persist": "^2.2.0"
   },
@@ -19,8 +22,7 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.12"
+    "sass-loader": "^8.0.2"
   },
   "browserslist": [
     "> 1%",

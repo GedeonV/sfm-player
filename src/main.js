@@ -3,7 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
-import "./../node_modules/bulma/css/bulma.css";
+import AudioVisual from "vue-audio-visual";
+
+Vue.use(AudioVisual);
 
 Vue.config.productionTip = false;
 

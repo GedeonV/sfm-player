@@ -15,6 +15,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     user_token: "",
+    lastMusic: "",
     //members: false
   },
 
@@ -27,6 +28,10 @@ export default new Vuex.Store({
     logout(state) {
       state.user = null;
       state.user_token = null;
+    },
+
+    music(state, data) {
+      state.lastMusic = data;
     },
   },
 });
