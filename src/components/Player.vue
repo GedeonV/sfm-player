@@ -1,8 +1,13 @@
 <template>
   <div>
+    <!-- //======= Balise audio =======// -->
+
     <audio crossorigin="anonymous" ref="audioPlayer">
       <source :src="currentSong" type="audio/mpeg" />
     </audio>
+
+    <!-- //======= Player=======// -->
+
     <div class="container">
       <div class="box">
         <div class="audioVisual">
@@ -21,6 +26,12 @@
             playtime-font="32px helvetica"
             playtime-color="#eff0eb"
           ></av-circle>
+          <div v-if="cptActive">
+            <p class="has-text-white">
+              <span class="countdown">{{cpt}}</span> secondes
+            </p>
+            <p class="has-text-white">avant le prochain participant</p>
+          </div>
         </div>
 
         <div v-if="!loading" class="audioInfo">
@@ -95,6 +106,9 @@
         </div>
       </div>
     </div>
+
+    <!-- //======= Modal =======// -->
+
     <div class="modal" v-bind:class="{ 'is-active': isActiveEvent }">
       <div class="modal-background"></div>
       <div class="modal-content">
@@ -114,8 +128,10 @@
 export default {
   data() {
     return {
+      //=========Variables Evènements==========//
       event: {},
       users: [],
+      //=========Variables Player==========//
       songsList: [],
       fullname: "",
       isPlaying: false,
@@ -131,8 +147,12 @@ export default {
       nextSongTitle: "",
       nextArtist: "",
       currentArtist: "",
+      //=========Variables Etat==========//
       loading: false,
       isActiveEvent: false,
+      //=========Variables Compte à rebours==========//
+      cpt: 60,
+      cptActive: false,
     };
   },
   methods: {
@@ -241,10 +261,19 @@ export default {
 
     nextMusic() {
       if (this.musicIndex < this.songsList.length - 1) {
-        this.musicIndex += 1;
-        this.loadMusic(this.musicIndex);
-        this.isPlaying = true;
-        this.playMusic();
+        let countdown = setInterval(() => {
+          this.cptActive = true;
+          --this.cpt;
+          if (this.cpt == 0) {
+            this.musicIndex += 1;
+            this.loadMusic(this.musicIndex);
+            this.isPlaying = true;
+            clearInterval(countdown);
+            this.cpt = 60;
+            this.cptActive = false;
+            this.playMusic();
+          }
+        }, 1000);
       } else {
         this.isActiveEvent = true;
         axios
@@ -496,6 +525,10 @@ input.rs-range {
     border: 0px solid $primary;
     background: $primary;
   }
+}
+
+span.countdown {
+  font-size: 32pt;
 }
 
 #background {
