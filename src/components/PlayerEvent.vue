@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="item in this.events" :key="item._id">
+      <li v-for="item in computedDate" :key="item._id">
         <div class="card grow">
           <header class="card-header">
             <p class="card-header-title">{{ item.event_name }}</p>
@@ -9,7 +9,7 @@
 
           <div class="card-content">
             <p>{{ item.theme }}</p>
-            <p>{{ getDate(item.date) }}</p>
+            <p>{{ item.date }}</p>
             <p id="desc">{{ item.description }}</p>
             <p>{{ item.location }}</p>
             <p>
@@ -40,7 +40,7 @@
 export default {
   data() {
     return {
-      events: {},
+      events: [],
       dateFR: "",
       interval: "",
     };
@@ -73,6 +73,27 @@ export default {
   beforeDestroy() {
     clearInterval(this.interval);
   },
+
+  computed: {
+    computedDate() {
+      let prevDate = "";
+      let newResult = [];
+      this.events.forEach((events) => {
+        let showDate = false;
+        if (prevDate != events.date) {
+          showDate = true;
+          events.date = this.getDate(events.date);
+        }
+        newResult.push({
+          ...events,
+          showDate,
+        });
+        prevDate = events.date;
+      });
+      return newResult;
+    },
+  },
+
   watch: {
     $route(to, from) {
       clearInterval(this.interval);
