@@ -261,6 +261,8 @@ export default {
 
     nextMusic() {
       if (this.musicIndex < this.songsList.length - 1) {
+        this.pauseMusic();
+        this.isPlaying = false;
         let countdown = setInterval(() => {
           this.cptActive = true;
           --this.cpt;
